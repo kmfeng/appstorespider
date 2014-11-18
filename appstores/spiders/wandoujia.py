@@ -1,35 +1,17 @@
 #!-*- coding: utf8 -*-
 
-import urlparse
-
 import scrapy
-from scrapy.utils.project import get_project_settings
 
 from appstores.items import AppstoresItem
+from appstores.spiders import XSpider
 
 
-class WandoujiaSpider(scrapy.Spider):
+class WandoujiaSpider(XSpider):
     name = "wandoujia"
 
     allowed_domains = ["www.wandoujia.com",]
 
     _url_format = 'http://www.wandoujia.com/search?key=%s&source=appcategory'
-
-    def __init__(self, *args, **kwargs):
-        super(WandoujiaSpider, self).__init__(*args, **kwargs)
-        self.start_urls = []
-
-        settings = get_project_settings()
-        for kw in settings.get('SEARCH_KEYWORDS'):
-            self.start_urls.append(self._url_format % kw)
-
-        self.ranking_dict = {}
-
-    def _get_search_keyword_from_q_key(self, url):
-        qs = urlparse.urlparse(url).query
-        k = urlparse.parse_qs(qs).get('key')[0]
-        k = k.decode('utf8')
-        return k
 
     def parse_specified_item(self, response):
         display_name = response.css(
@@ -41,7 +23,7 @@ class WandoujiaSpider(scrapy.Spider):
         ranking = self.ranking_dict[package_name]
 
         refer = response.request.headers.get('Referer')
-        keyword = self._get_search_keyword_from_q_key(refer)
+        keyword = self._get_search_keyword_from_q('key', refer)
 
         num_list = response.css('.num-list')
         dlcount = num_list.xpath(
