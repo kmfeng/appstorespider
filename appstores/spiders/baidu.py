@@ -50,9 +50,9 @@ class BaiduSpider(XSpider):
 
         # NOTE: 评分为100分制
         rating = None
-        rating_ele = response.css('span.star-percent').xpath('@style').extract()[0]
+        rating_percent = response.css('span.star-percent').xpath('@style').extract()[0]
         pattern = re.compile(r'width:(\d+)%')
-        result = pattern.search(rating_ele)
+        result = pattern.search(rating_percent)
         if result:
             rating = result.groups()[0]
 
