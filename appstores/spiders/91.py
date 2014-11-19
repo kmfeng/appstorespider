@@ -35,7 +35,7 @@ class WandoujiaSpider(XSpider):
 
         dlcount = content[4].split(u'：')[1]
 
-        rating = None
+        rating = ''
         rating_percent = response.xpath(
             '//span[@class="star_on"]/@style'
         ).extract()[0]
@@ -44,9 +44,9 @@ class WandoujiaSpider(XSpider):
         if result:
             rating = int(result.groups()[0])
 
-        comment_count = None
+        comment_count = ''
 
-        update_time = None
+        update_time = ''
 
         item = AppstoresItem(package_name=package_name,
             display_name=display_name, keyword=keyword, dlcount=dlcount,

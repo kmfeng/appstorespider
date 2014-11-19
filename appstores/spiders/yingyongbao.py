@@ -25,7 +25,7 @@ class YingyongbaoSpider(XSpider):
             package_name = obj['pkgName']
             display_name = obj['appName']
             dlcount = obj['appDownCount']
-            comment_count = None
+            comment_count = ''
             category = obj['categoryName']
 
             update_time = datetime.datetime.fromtimestamp(obj['apkPublishTime'])

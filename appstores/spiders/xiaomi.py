@@ -33,7 +33,7 @@ class XiaomiSpider(XSpider):
         data = json_obj['appMap']
         display_name = data['displayName']
 
-        package_name = None
+        package_name = ''
 
         ranking = self.ranking_dict[int(id)]
 
@@ -45,7 +45,7 @@ class XiaomiSpider(XSpider):
         keys = ['Rating1', 'Rating2', 'Rating3', 'Rating4', 'Rating5']
         comment_count = sum([int(data[k]) for k in keys])
 
-        dlcount = None
+        dlcount = ''
 
         update_time = data['uploadtime']
 

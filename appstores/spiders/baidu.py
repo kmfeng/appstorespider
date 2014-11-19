@@ -26,7 +26,7 @@ class BaiduSpider(XSpider):
 
         ranking = self.ranking_dict[package_name]
 
-        keyword = None
+        keyword = ''
         url = response.request.url
         _keyword = self._get_search_keyword_from_q('f', url)
         pattern = re.compile(r'search_app_(.*?)@')
@@ -37,19 +37,19 @@ class BaiduSpider(XSpider):
         num_list = response.css('span.download-num::text').extract()[0]
         dlcount = num_list.split(':')[1].strip()
 
-        comment_count = None
+        comment_count = ''
 
         category = response.xpath(
             '//div[@class="nav"]/span[position()=3]/a/text()'
         ).extract()[0]
 
-        update_time = None
+        update_time = ''
 
         version = response.css('span.version::text').extract()[0]
         version = version.split(':')[1].strip()
 
         # NOTE: 评分为100分制
-        rating = None
+        rating = ''
         rating_percent = response.css('span.star-percent').xpath('@style').extract()[0]
         pattern = re.compile(r'width:(\d+)%')
         result = pattern.search(rating_percent)
