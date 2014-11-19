@@ -54,7 +54,7 @@ class BaiduSpider(XSpider):
         pattern = re.compile(r'width:(\d+)%')
         result = pattern.search(rating_percent)
         if result:
-            rating = result.groups()[0]
+            rating = int(result.groups()[0])
 
         item = AppstoresItem(package_name=package_name,
             display_name=display_name, keyword=keyword, dlcount=dlcount,

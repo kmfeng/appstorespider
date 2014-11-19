@@ -42,7 +42,7 @@ class WandoujiaSpider(XSpider):
         pattern = re.compile(r'width:(\d+)%')
         result = pattern.search(rating_percent)
         if result:
-            rating = result.groups()[0]
+            rating = int(result.groups()[0])
 
         comment_count = None
 

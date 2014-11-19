@@ -34,7 +34,7 @@ class YingyongbaoSpider(XSpider):
             version = obj['versionName']
 
             # 5分制 to 100分制
-            rating = obj['averageRating'] * 20
+            rating = int(obj['averageRating'] * 20)
 
             item = AppstoresItem(package_name=package_name,
                 display_name=display_name, keyword=keyword, dlcount=dlcount,
