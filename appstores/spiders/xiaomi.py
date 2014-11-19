@@ -10,7 +10,7 @@ from appstores.items import AppstoresItem
 from appstores.spiders import XSpider
 
 
-_id_reg = re.compile(r'#page=detail&id=(\d+)')
+_id_reg = re.compile(r'&id=(\d+)#page=detail')
 _keywords_reg = re.compile(r'"zh_CN":\"(.*?)\"}')
 
 _detail_api_format = 'http://m.app.mi.com/detailapi/%s'
@@ -60,21 +60,16 @@ class XiaomiSpider(XSpider):
         )
         yield item
 
-    def _populate_ranking(self, response):
-        json_obj = json.loads(response.body)
+    def parse(self, response):
+        kw = self._get_search_keyword_from_q('keywords', response.request.url)
+        url_format = 'http://m.app.mi.com/?word=%s&id=%s#page=detail'
 
+        json_obj = json.loads(response.body)
         ranking = 1
         for d in json_obj['data']:
             pk = d['appId']
             self.ranking_dict[pk] = ranking
             ranking += 1
 
-    def parse(self, response):
-        self._populate_ranking(response)
-
-        kw = self._get_search_keyword_from_q('keywords', response.request.url)
-        url_format = 'http://m.app.mi.com/?word=%s#page=detail&id=%s'
-
-        for pk in self.ranking_dict:
             url = url_format % (kw, pk)
             yield scrapy.Request(url, callback=self.parse_specified_item)

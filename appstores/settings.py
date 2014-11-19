@@ -22,3 +22,5 @@ SEARCH_KEYWORDS = [
     u'浏览器', u'手机浏览器', u'网页浏览器',
     u'网页', u'欧朋', u'欧朋浏览器',
 ]
+
+DOWNLOAD_DELAY = 0.5
