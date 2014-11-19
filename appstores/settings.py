@@ -13,6 +13,10 @@ BOT_NAME = 'appstores'
 SPIDER_MODULES = ['appstores.spiders']
 NEWSPIDER_MODULE = 'appstores.spiders'
 
+ITEM_PIPELINES = {
+    'appstores.pipelines.AppstoresPipeline': 100,
+}
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENT = ('Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_3_2 like Mac OS X;'
      'en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/'
@@ -24,3 +28,10 @@ SEARCH_KEYWORDS = [
 ]
 
 DOWNLOAD_DELAY = 0.5
+
+DB_HOST = 'mysql-m1.nhorizon.in'
+DB_PORT = 3310
+DB_NAME = 'appstore_spider'
+DB_USER = 'spider'
+DB_PASSWD = 'spiderman'
+DB_TABLE = 'apps'
