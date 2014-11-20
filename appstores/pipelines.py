@@ -18,20 +18,19 @@ _db.set_character_set('utf8')
 
 
 class AppstoresPipeline(object):
-    _sql_format = (
-        u'INSERT INTO {table}('
-        'display_name, package_name, keyword, dlcount,'
-        'comment_count, category, update_time, version,'
-        'ranking, rating, store_name) VALUES("{{display_name}}", "{{package_name}}",'
-        '"{{keyword}}", "{{dlcount}}", "{{comment_count}}", "{{category}}",'
-        '"{{update_time}}", "{{version}}", {{ranking}}, {{rating}}, "{{store_name}}")'
-    ).format(table=DB_TABLE)
-
     def _insert_into_db(self, item):
-        # TODO: security check, exception process, etc.
-        sql = self._sql_format.format(**item)
+        sql = 'INSERT INTO %s (%s) VALUES(%s);'
+        keys = item.keys()
+        values = item.values()
+
+        fields = ','.join(keys)
+        vcols_format = '%s,' * len(keys)
+        vcols_format = vcols_format[:-1]
+
+        sql = sql % (DB_TABLE, fields, vcols_format)
+
         cursor = _db.cursor()
-        cursor.execute(sql)
+        cursor.execute(sql, values)
         _db.commit()
 
     def process_item(self, item, spider):
