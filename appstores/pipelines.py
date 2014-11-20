@@ -22,9 +22,9 @@ class AppstoresPipeline(object):
         u'INSERT INTO {table}('
         'display_name, package_name, keyword, dlcount,'
         'comment_count, category, update_time, version,'
-        'ranking, rating) VALUES("{{display_name}}", "{{package_name}}",'
+        'ranking, rating, store_name) VALUES("{{display_name}}", "{{package_name}}",'
         '"{{keyword}}", "{{dlcount}}", "{{comment_count}}", "{{category}}",'
-        '"{{update_time}}", "{{version}}", {{ranking}}, {{rating}})'
+        '"{{update_time}}", "{{version}}", {{ranking}}, {{rating}}, "{{store_name}}")'
     ).format(table=DB_TABLE)
 
     def _insert_into_db(self, item):

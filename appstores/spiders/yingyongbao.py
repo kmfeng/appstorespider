@@ -40,6 +40,7 @@ class YingyongbaoSpider(XSpider):
                 display_name=display_name, keyword=keyword, dlcount=dlcount,
                 comment_count=comment_count, category=category, rating=rating,
                 update_time=update_time, version=version, ranking=ranking,
+                store_name=self.name,
             )
             yield item
             ranking += 1

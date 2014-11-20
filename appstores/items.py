@@ -20,3 +20,4 @@ class AppstoresItem(scrapy.Item):
     version = scrapy.Field()
     ranking = scrapy.Field()
     rating = scrapy.Field()
+    store_name = scrapy.Field()

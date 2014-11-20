@@ -14,6 +14,7 @@ CREATE TABLE apps (
     `version` varchar(32) DEFAULT NULL,
     `ranking` int(11) NOT NULL,
     `rating` int(11) NOT NULL,
+    `store_name` varchar(64) DEFAULT NULL,
     `time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
